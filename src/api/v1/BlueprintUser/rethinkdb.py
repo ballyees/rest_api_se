@@ -65,8 +65,15 @@ class ApiRequset:
         if b: 
             sorted_dict.append(search_item)
         return sorted_dict
+
+    def get_user(self, data):
+        username = data["username"]
+        password = data["password"]
+        cursor = self.__r.table('users').filter({"username": username, "password": password})
+        if cursor:
+            cursor['userId'] = cursor['id']
+            return cursor, 200
+        return "not found", 404
         
         
-        
-    
 api = ApiRequset()

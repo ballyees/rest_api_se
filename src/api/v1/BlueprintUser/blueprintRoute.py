@@ -29,5 +29,5 @@ async def rank(request):
 
 @bp_users.route('/login', methods=["POST"])
 async def login(request):
-    res = api.get_user(request.json)
-    return json({config.response_key: res})
+    res, status = api.get_user(request.json)
+    return json({config.response_key: res}, status=status)
